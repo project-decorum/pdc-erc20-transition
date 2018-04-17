@@ -1,4 +1,7 @@
 module.exports = {
-    baseUrl: './',
-    productionSourceMap: false
+  baseUrl: './',
+  productionSourceMap: false,
+  devServer: {
+    disableHostCheck: true,
+  }      
 }
