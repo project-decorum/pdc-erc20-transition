@@ -17,6 +17,8 @@ npm run build  # Build the tool (into dist/)
 
 Open `dist/index.html` in your browser.
 
+Follow the steps to convert your Project Decorum (PDC) coins from OMNI to ERC20.
+
 
 ## License
 

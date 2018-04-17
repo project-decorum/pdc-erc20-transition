@@ -1,26 +1,63 @@
 <template>
-  <div id="app">
-    <div>
-      <label for="eth">Ethereum address: </label>
-      <input type="text" id="eth" v-model="eth_address" required>
+  <div class="container" id="app">
+    <div class="card my-4">
+      <div class="card-header">
+        <h2 class="card-title">Step 1 - Your Ethereum address</h2>
+        <p class="lead">
+          An address you can send and receive from. For example an address on <a href="https://www.myetherwallet.com/">myetherwallet.com</a>.
+        </p>
+      </div>
+      <div class="card-body form-group">
+        <label for="eth">Enter your Ethereum address, starting with <samp>0x</samp></label>
+        <input class="form-control form-control-lg monospace" type="text" id="eth" v-model="eth_address" required>
+      </div>
     </div>
-    <div>
-      <label for="btc">Bitcoin address: </label>
-      <input type="text" id="btc" v-model="btc_address" disabled>
+
+    <div class="card my-4">
+      <div class="card-header">
+        <h2 class="card-title">Step 2 - Bitcoin burn address</h2>
+        <p class="lead">
+          Burn your OMNI PDC-coins by sending them to the burn address.
+        </p>
+      </div>
+      <div class="card-body form-group">
+        <label for="btc">Bitcoin burn address</label>
+        <input class="form-control form-control-lg monospace" type="text" id="btc" v-model="btc_address" readonly>
+      </div>
+    </div>
+
+    <div class="card my-4">
+      <div class="card-header">
+        <h2 class="card-title">Step 3 - Wait for transaction to be processed</h2>
+        <p class="lead">
+          Wait for the burn transaction to be confirmed and for us to process it.
+        </p>
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Smart Contract to reflect the balance that is to be claimed.
+        </div>
+      </div>
+    </div>
+
+    <div class="card my-4">
+      <div class="card-header">
+        <h2 class="card-title">Step 4 - Claim your ERC20 coins</h2>
+        <p class="lead">
+          Send a claim transaction to the Smart Contract to receive your ERC20 coins you're entitled to.
+        </p>
+      </div>
+      <div class="card-body form-group">
+        <label for="btc">Smart Contract address</label>
+        <input class="form-control form-control-lg monospace" type="text" value="0xe4f6f88811722f683bd212a2820f86391feb3161" readonly>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import bitcore from 'bitcore-lib'
-import web3 from 'web3'
-
-function eth_to_btc(eth_address_str: string) {
-    const eth_address_buf = Buffer.from(eth_address_str, 'hex')
-    return bitcore.Address.fromPublicKeyHash(eth_address_buf).toString()
-}
-
+import { eth_to_btc, eth_validate } from './lib'
 
 @Component({})
 export default class App extends Vue {
@@ -29,15 +66,14 @@ export default class App extends Vue {
 
   @Watch('eth_address')
   onInput() {
-    const valid = web3.utils.isAddress(this.eth_address)
+    const valid = eth_validate(this.eth_address)
 
     if (!valid) {
       this.btc_address = ''
       return
     }
 
-    const eth_address_str = this.eth_address.substring(2)
-    this.btc_address = eth_to_btc(eth_address_str)
+    this.btc_address = eth_to_btc(this.eth_address)
   }
 }
 </script>
