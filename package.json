@@ -11,7 +11,7 @@
     "vue": "^2.5.13",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
-    "web3": "^1.0.0-beta2"
+    "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
     "@types/node": "^9.6.5",
