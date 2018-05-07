@@ -10,3 +10,8 @@ declare module 'bn.js' {
 declare module 'web3';
 
 declare module 'bitcore-lib';
+
+declare module "*.json" {
+  const value: any;
+  export default value;
+}

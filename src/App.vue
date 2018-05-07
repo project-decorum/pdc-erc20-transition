@@ -35,7 +35,13 @@
       </div>
       <div class="card-body">
         <div class="card-text">
-          The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Smart Contract to reflect the balance that is to be claimed.
+          <p>
+            The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Smart Contract to reflect the balance that is to be claimed.
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="allowance">Allowance</label>
+          <input class="form-control form-control-lg monospace" :class="{ 'is-valid': allowance !== '0' }" id="allowance" type="number" v-model="allowance" readonly>
         </div>
       </div>
     </div>
@@ -48,8 +54,11 @@
         </p>
       </div>
       <div class="card-body form-group">
-        <label for="btc">Smart Contract address</label>
-        <input class="form-control form-control-lg monospace" type="text" value="0xe4f6f88811722f683bd212a2820f86391feb3161" readonly>
+        <label for="contract-address">Contract address</label>
+        <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xE4f6f88811722F683bd212a2820F86391feb3161" readonly>
+
+        <label for="data">Data to send to contract</label>
+        <textarea class="form-control form-control-lg monospace" id="data" v-model="data" readonly></textarea>
       </div>
     </div>
   </div>
@@ -57,15 +66,17 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { eth_to_btc, eth_validate } from './lib'
+import { eth_to_btc, eth_validate, eth_to_allowance, eth_to_data } from './lib'
 
 @Component({})
 export default class App extends Vue {
   eth_address: string = ''
   btc_address: string = ''
+  allowance: string = '0'
+  data: string = ''
 
   @Watch('eth_address')
-  onInput() {
+  async onInput() {
     const valid = eth_validate(this.eth_address)
 
     if (!valid) {
@@ -74,10 +85,8 @@ export default class App extends Vue {
     }
 
     this.btc_address = eth_to_btc(this.eth_address)
+    this.allowance = await eth_to_allowance(this.eth_address)
+    this.data = await eth_to_data(this.eth_address)
   }
 }
 </script>
-
-<style>
-
-</style>
