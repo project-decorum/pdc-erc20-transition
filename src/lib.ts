@@ -43,8 +43,8 @@ export async function eth_to_data(eth_address_str: string) {
 
 
 
-contract.getPastEvents('Approval', {
-  fromBlock: 3000000,
-  // toBlock: 'latest',
-  filter: { owner: '0x4b86dec5798e095f957bd17a7afda53f7118318f' }
-}).then(console.log)
+// contract.getPastEvents('Approval', {
+//   fromBlock: 3000000,
+//   // toBlock: 'latest',
+//   filter: { owner: '0x4b86dec5798e095f957bd17a7afda53f7118318f' }
+// }).then(console.log)
