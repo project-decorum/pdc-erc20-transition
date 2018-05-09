@@ -12,16 +12,19 @@ export const types = {
 
 
 export default <MutationTree<State>>{
-  [types.ETH_ADDRESS_UPDATE]: function ETH_ADDRESS_UPDATE(state, addr) {
+  [types.ETH_ADDRESS_UPDATE](state, addr) {
     state.eth_address = addr
   },
-  [types.ETH_ADDRESS_VALID_UPDATE]: function ETH_ADDRESS_VALID_UPDATE(state, valid) {
+
+  [types.ETH_ADDRESS_VALID_UPDATE](state, valid) {
     state.eth_address_valid = valid
   },
-  [types.BTC_ADDRESS_UPDATE]: function BTC_ADDRESS_UPDATE(state, addr) {
+
+  [types.BTC_ADDRESS_UPDATE](state, addr) {
     state.btc_address = addr
   },
-  [types.ALLOWANCE_UPDATE]: function ALLOWANCE_UPDATE(state, allowance) {
+
+  [types.ALLOWANCE_UPDATE](state, allowance) {
     state.allowance = allowance
   },
 }

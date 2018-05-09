@@ -22,7 +22,7 @@ import EthAddress from '@/views/component/eth-address.vue'
 
 @Component({
   components: {
-    EthAddress,
+    'eth-address': EthAddress,
   }
 })
 export default class S1 extends Vue {

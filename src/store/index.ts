@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 import State from './state'
 import mutations from './mutations'
+import getters from './getters'
 
 
 export default new Vuex.Store<State>({
@@ -12,4 +13,5 @@ export default new Vuex.Store<State>({
 
   state: new State(),
   mutations: mutations,
+  getters: getters,
 })
