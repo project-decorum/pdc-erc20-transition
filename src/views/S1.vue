@@ -37,7 +37,7 @@ export default class S1 extends Vue {
   }
 
   set eth_address(addr: string) {
-    this.$store.commit('ETH_ADDRESS_UPDATE', addr)
+    this.$store.dispatch('update', addr)
   }
 
   get valid() {

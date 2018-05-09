@@ -9,7 +9,7 @@
       </div>
       <div class="card-body form-group">
         <label for="contract-address">Contract address</label>
-        <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xE4f6f88811722F683bd212a2820F86391feb3161" readonly>
+        <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xTODO" readonly>
 
         <label for="data">Data to send to contract</label>
         <textarea class="form-control form-control-lg monospace" id="data" v-model="data" readonly></textarea>

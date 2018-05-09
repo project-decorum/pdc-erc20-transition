@@ -15,7 +15,13 @@
         </div>
         <div class="form-group">
           <label for="allowance">Allowance</label>
-          <input class="form-control form-control-lg monospace" id="allowance" type="number" v-model="allowance" readonly>
+
+          <div class="input-group">
+            <input class="form-control form-control-lg monospace" id="allowance" type="number" v-model="allowance" readonly>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" @click="$store.dispatch('update')">refresh</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -30,20 +36,6 @@ import { eth_to_allowance } from '@/lib'
 export default class S3 extends Vue {
   get allowance() {
     return this.$store.state.allowance
-  }
-
-  set allowance(addr: string | null) {
-    this.$store.commit('ALLOWANCE_UPDATE', addr)
-  }
-
-  @Watch('$store.state.eth_address_valid', { immediate: true })
-  async update() {
-    if (this.$store.state.eth_address_valid !== true) {
-      this.allowance = null
-      return
-    }
-
-    this.allowance = await eth_to_allowance(this.$store.state.eth_address)
   }
 }
 </script>
