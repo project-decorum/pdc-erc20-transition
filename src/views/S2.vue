@@ -31,11 +31,12 @@ export default class S2 extends Vue {
 
   @Watch('$store.state.eth_address_valid', { immediate: true })
   async update() {
-    if (this.$store.state.eth_address_valid === true) {
-      this.btc_address = eth_to_btc(this.$store.state.eth_address)
-    } else {
+    if (this.$store.state.eth_address_valid !== true) {
       this.btc_address = null
+      return
     }
+
+    this.btc_address = eth_to_btc(this.$store.state.eth_address)
   }
 }
 </script>

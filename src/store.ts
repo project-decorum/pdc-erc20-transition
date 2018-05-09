@@ -10,6 +10,7 @@ export default new Vuex.Store({
     eth_address: '',
     eth_address_valid: null,
     btc_address: null,
+    allowance: null,
   },
 
   mutations: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     BTC_ADDRESS_UPDATE(state, addr) {
       state.btc_address = addr
+    },
+    ALLOWANCE_UPDATE(state, allowance) {
+      state.allowance = allowance
     },
   },
 
