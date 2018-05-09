@@ -17,7 +17,6 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { eth_to_btc, eth_validate, eth_to_allowance, eth_to_data } from '@/lib'
 
 @Component({})
 export default class S2 extends Vue {

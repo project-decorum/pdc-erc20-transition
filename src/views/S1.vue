@@ -8,7 +8,20 @@
         </p>
       </div>
       <div class="card-body">
-        <eth-address v-model="eth_address" @valid="valid = $event" />
+        <form>
+          <div class="form-row">
+            <label for="eth-address">Ethereum address</label>
+            <input type="text" class="form-control form-control-lg monospace" :class="{ 'is-valid': valid === true, 'is-invalid': valid === false }" id="eth-address" v-model="eth_address" required>
+            <small class="form-text text-muted">An Ethereum address starts with '<samp>0x</samp>'.</small>
+
+            <div class="valid-feedback">
+              The address is valid.
+            </div>
+            <div class="invalid-feedback">
+              Please enter a valid address.
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -16,15 +29,8 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { eth_to_btc, eth_validate, eth_to_allowance, eth_to_data } from '@/lib'
 
-import EthAddress from '@/views/component/eth-address.vue'
-
-@Component({
-  components: {
-    'eth-address': EthAddress,
-  }
-})
+@Component({})
 export default class S1 extends Vue {
   get eth_address() {
     return this.$store.state.eth_address
@@ -36,9 +42,6 @@ export default class S1 extends Vue {
 
   get valid() {
     return this.$store.state.eth_address_valid
-  }
-  set valid(valid: boolean) {
-    this.$store.commit('ETH_ADDRESS_VALID_UPDATE', valid)
   }
 }
 </script>
