@@ -12,14 +12,15 @@ async function update(ctx: Context, eth_address?: string) {
     ctx.commit(types.ETH_ADDRESS_UPDATE, eth_address)
   }
 
+  // Update the burn address tx count too.
+  ctx.dispatch('updateBurnTx')
+
   if (ctx.state.eth_address_valid !== true) {
     ctx.commit(types.ALLOWANCE_FULFILLED, null)
     ctx.commit(types.TX_DATA_FULFILLED, null)
 
     return
   }
-
-  ctx.dispatch('updateBurnTx')
 
   ctx.commit(types.ALLOWANCE_PENDING)
   ctx.commit(types.TX_DATA_PENDING)
