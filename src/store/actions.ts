@@ -3,6 +3,7 @@ import RootState from './state'
 import { types } from './mutations'
 
 import { eth_to_allowance, eth_to_data } from '@/lib'
+import axios from 'axios'
 
 type Context = ActionContext<RootState, RootState>
 
@@ -18,6 +19,8 @@ async function update(ctx: Context, eth_address?: string) {
     return
   }
 
+  ctx.dispatch('updateBurnTx')
+
   ctx.commit(types.ALLOWANCE_PENDING)
   ctx.commit(types.TX_DATA_PENDING)
 
@@ -30,6 +33,21 @@ async function update(ctx: Context, eth_address?: string) {
   ctx.commit(types.TX_DATA_FULFILLED, tx_data)
 }
 
+async function updateBurnTx(ctx: Context) {
+  if (ctx.state.eth_address_valid !== true) {
+    ctx.commit(types.BURN_TX_FULFILLED, null)
+
+    return
+  }
+
+  ctx.commit(types.BURN_TX_PENDING)
+
+  const response = await axios.get('https://api.blockcypher.com/v1/btc/main/addrs/' + ctx.getters.btc_address + '/balance', { params: { cors: true } })
+
+  ctx.commit(types.BURN_TX_FULFILLED, response.data.n_tx)
+}
+
 export default <ActionTree<RootState, RootState>>{
   update,
+  updateBurnTx,
 }

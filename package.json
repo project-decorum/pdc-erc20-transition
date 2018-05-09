@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bignumber.js": "^7.0.1",
     "bitcore-lib": "^0.15.0",
     "bootstrap": "^4.1.0",

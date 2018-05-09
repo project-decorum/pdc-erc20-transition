@@ -9,4 +9,7 @@ export default class State {
 
   txData: string | null = null
   txDataPending: boolean = false
+
+  burnAddressTx: number | null = null
+  burnAddressTxPending: boolean = false
 }

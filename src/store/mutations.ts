@@ -12,6 +12,9 @@ export const types = {
 
   TX_DATA_PENDING: 'TX_DATA_PENDING',
   TX_DATA_FULFILLED: 'TX_DATA_FULFILLED',
+
+  BURN_TX_PENDING: 'BURN_TX_PENDING',
+  BURN_TX_FULFILLED: 'BURN_TX_FULFILLED',
 }
 
 
@@ -39,5 +42,15 @@ export default <MutationTree<State>>{
   [types.TX_DATA_FULFILLED](state, txData: string | null) {
     state.txDataPending = false
     state.txData = txData
+  },
+
+  [types.BURN_TX_PENDING](state) {
+    state.burnAddressTxPending = true
+    state.burnAddressTx = null
+  },
+
+  [types.BURN_TX_FULFILLED](state, burnAddressTx: number | null) {
+    state.burnAddressTxPending = false
+    state.burnAddressTx = burnAddressTx
   },
 }
