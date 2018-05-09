@@ -1,6 +1,6 @@
 <template>
   <div class="container" id="app">
-    <ul class="nav nav-tabs my-5">
+    <ul class="nav nav-tabs nav-fill my-5">
       <li class="nav-item">
         <router-link to="/1" active-class="active" class="nav-link">Step 1</router-link>
       </li>

@@ -31,7 +31,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component({})
-export default class S1 extends Vue {
+export default class S2 extends Vue {
   get eth_address() {
     return this.$store.state.eth_address
   }

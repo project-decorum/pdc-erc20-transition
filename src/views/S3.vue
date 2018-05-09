@@ -17,7 +17,7 @@
           <label for="allowance">Allowance</label>
 
           <div class="input-group">
-            <input class="form-control form-control-lg monospace" id="allowance" type="number" v-model="allowance" readonly>
+            <input class="form-control form-control-lg monospace"  :class="{ 'is-valid': Number(allowance) > 0 }" id="allowance" type="number" v-model="allowance" readonly>
             <div class="input-group-append">
               <button class="btn btn-primary" type="button" @click="$store.dispatch('update')">refresh</button>
             </div>
@@ -30,12 +30,11 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { eth_to_allowance } from '@/lib'
 
 @Component({})
 export default class S3 extends Vue {
   get allowance() {
-    return this.$store.state.allowance
+    return this.$store.getters.allowance_decimal
   }
 }
 </script>

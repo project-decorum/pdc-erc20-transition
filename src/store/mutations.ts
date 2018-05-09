@@ -1,6 +1,7 @@
 import State from './state'
 import { MutationTree } from 'vuex'
 
+import { BigNumber } from 'bignumber.js'
 import { eth_validate } from '@/lib'
 
 export const types = {
@@ -8,6 +9,9 @@ export const types = {
 
   ALLOWANCE_PENDING: 'ALLOWANCE_PENDING',
   ALLOWANCE_FULFILLED: 'ALLOWANCE_FULFILLED',
+
+  TX_DATA_PENDING: 'TX_DATA_PENDING',
+  TX_DATA_FULFILLED: 'TX_DATA_FULFILLED',
 }
 
 
@@ -22,8 +26,18 @@ export default <MutationTree<State>>{
     state.allowance = null
   },
 
-  [types.ALLOWANCE_FULFILLED](state, allowance) {
+  [types.ALLOWANCE_FULFILLED](state, allowance: BigNumber | null) {
     state.allowancePending = false
     state.allowance = allowance
+  },
+
+  [types.TX_DATA_PENDING](state) {
+    state.txDataPending = true
+    state.txData = null
+  },
+
+  [types.TX_DATA_FULFILLED](state, txData: string | null) {
+    state.txDataPending = false
+    state.txData = txData
   },
 }

@@ -11,24 +11,20 @@
         <label for="contract-address">Contract address</label>
         <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xTODO" readonly>
 
-        <label for="data">Data to send to contract</label>
-        <textarea class="form-control form-control-lg monospace" id="data" v-model="data" readonly></textarea>
+        <label for="tx-data">Data to send to contract</label>
+        <textarea class="form-control form-control-lg monospace" id="tx-data" v-model="txData" readonly></textarea>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { eth_to_data } from '@/lib'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
-export default class S1 extends Vue {
-  private data: string = ''
-
-  @Watch('$store.state.eth_address_valid', { immediate: true })
-  async watchAllowance() {
-    this.data = await eth_to_data(this.$store.state.eth_address)
+export default class S4 extends Vue {
+  get txData() {
+    return this.$store.state.txData
   }
 }
 </script>
