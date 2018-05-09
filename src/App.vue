@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
           <label for="allowance">Allowance</label>
-          <input class="form-control form-control-lg monospace" :class="{ 'is-valid': allowance !== '0' }" id="allowance" type="number" v-model="allowance" readonly>
+          <input class="form-control form-control-lg monospace" id="allowance" type="number" v-model="allowance" readonly>
         </div>
       </div>
     </div>
@@ -72,11 +72,11 @@ import { eth_to_btc, eth_validate, eth_to_allowance, eth_to_data } from './lib'
 export default class App extends Vue {
   eth_address: string = ''
   btc_address: string = ''
-  allowance: string = '0'
+  allowance: string = ''
   data: string = ''
 
   @Watch('eth_address')
-  async onInput() {
+  watchEthAddress() {
     const valid = eth_validate(this.eth_address)
 
     if (!valid) {
@@ -85,7 +85,25 @@ export default class App extends Vue {
     }
 
     this.btc_address = eth_to_btc(this.eth_address)
+  }
+
+  @Watch('btc_address')
+  async watchBtcAddress() {
+    if (this.btc_address === '') {
+      this.allowance = '';
+      return
+    }
+
     this.allowance = await eth_to_allowance(this.eth_address)
+  }
+
+  @Watch('allowance')
+  async watchAllowance() {
+    if (this.allowance === '' || this.allowance === '0') {
+      this.data = '';
+      return
+    }
+
     this.data = await eth_to_data(this.eth_address)
   }
 }
