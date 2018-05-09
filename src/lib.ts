@@ -23,6 +23,9 @@ export function eth_to_btc(eth_address_str: string) {
 export function eth_validate(eth_address_str: string) {
   return Web3.utils.isAddress(eth_address_str)
 }
+export function eth_to_checksum(eth_address_str: string) {
+  return Web3.utils.toChecksumAddress(eth_address_str)
+}
 
 export async function eth_to_allowance(eth_address_str: string) {
   const balanceOf = contract.methods.allowance(address_from, eth_address_str)
