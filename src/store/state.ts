@@ -7,6 +7,9 @@ export default class State {
   allowance: BigNumber | null = null
   allowancePending: boolean = false
 
+  balance: BigNumber | null = null
+  balancePending: boolean = false
+
   txData: string | null = null
   txDataPending: boolean = false
 

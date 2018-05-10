@@ -16,6 +16,10 @@ export default <GetterTree<State, any>>{
     return state.allowance === null ? null : state.allowance.shiftedBy(-8).toFixed(8)
   },
 
+  balance_decimal: (state) => {
+    return state.balance === null ? null : state.balance.shiftedBy(-8).toFixed(8)
+  },
+
   burned: (state) => {
     if (state.burnAddressTx === null) {
       return null

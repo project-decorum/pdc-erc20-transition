@@ -2,7 +2,7 @@ import { ActionTree, ActionContext } from 'vuex'
 import RootState from './state'
 import { types } from './mutations'
 
-import { eth_to_allowance, eth_to_data } from '@/lib'
+import { eth_to_allowance, eth_to_data, eth_to_balance } from '@/lib'
 import axios from 'axios'
 
 type Context = ActionContext<RootState, RootState>
@@ -14,6 +14,7 @@ async function update(ctx: Context, eth_address?: string) {
 
   // Update the burn address tx count too.
   ctx.dispatch('updateBurnTx')
+  ctx.dispatch('updateBalance')
 
   if (ctx.state.eth_address_valid !== true) {
     ctx.commit(types.ALLOWANCE_FULFILLED, null)
@@ -54,7 +55,22 @@ async function updateBurnTx(ctx: Context) {
   ctx.commit(types.BURN_TX_FULFILLED, transactions)
 }
 
+async function updateBalance(ctx: Context) {
+  if (ctx.state.eth_address_valid !== true) {
+    ctx.commit(types.BALANCE_FULFILLED, null)
+
+    return
+  }
+
+  ctx.commit(types.BALANCE_PENDING)
+
+  const balance = await eth_to_balance(ctx.state.eth_address)
+
+  ctx.commit(types.BALANCE_FULFILLED, balance)
+}
+
 export default <ActionTree<RootState, RootState>>{
   update,
   updateBurnTx,
+  updateBalance,
 }

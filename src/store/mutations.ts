@@ -16,6 +16,9 @@ export const types = {
 
   BURN_TX_PENDING: 'BURN_TX_PENDING',
   BURN_TX_FULFILLED: 'BURN_TX_FULFILLED',
+
+  BALANCE_PENDING: 'BALANCE_PENDING',
+  BALANCE_FULFILLED: 'BALANCE_FULFILLED',
 }
 
 
@@ -53,5 +56,15 @@ export default <MutationTree<State>>{
   [types.BURN_TX_FULFILLED](state, burnAddressTx: AddressTransaction[] | null) {
     state.burnAddressTxPending = false
     state.burnAddressTx = burnAddressTx
+  },
+
+  [types.BALANCE_PENDING](state) {
+    state.balancePending = true
+    state.balance = null
+  },
+
+  [types.BALANCE_FULFILLED](state, balance: BigNumber | null) {
+    state.balancePending = false
+    state.balance = balance
   },
 }

@@ -28,10 +28,17 @@ export function eth_to_checksum(eth_address_str: string) {
 }
 
 export async function eth_to_allowance(eth_address_str: string) {
-  const balanceOf = contract.methods.allowance(address_from, eth_address_str)
-  const allowance = new BigNumber(await balanceOf.call())
+  const allowanceTx = contract.methods.allowance(address_from, eth_address_str)
+  const allowance = new BigNumber(await allowanceTx.call())
 
   return allowance
+}
+
+export async function eth_to_balance(eth_address_str: string) {
+  const balanceOfTx = contract.methods.balanceOf( eth_address_str)
+  const balanceOf = new BigNumber(await balanceOfTx.call())
+
+  return balanceOf
 }
 
 export async function eth_to_data(eth_address_str: string, allowance: BigNumber) {
