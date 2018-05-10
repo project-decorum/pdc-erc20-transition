@@ -49,7 +49,7 @@ async function updateBurnTx(ctx: Context) {
   )
 
   // Filter out any other transactions
-  const transactions = (<any[]>response.data.transactions).filter(t => t.propertyid === 59 && t.type_int === 0)
+  const transactions = (<any[]>response.data.transactions).filter(t => t.propertyid === 59 && t.type_int === 0 && t.referenceaddress === ctx.getters.btc_address)
 
   ctx.commit(types.BURN_TX_FULFILLED, transactions)
 }

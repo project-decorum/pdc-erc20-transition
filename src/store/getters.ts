@@ -16,6 +16,15 @@ export default <GetterTree<State, any>>{
     return state.allowance === null ? null : state.allowance.shiftedBy(-8).toFixed(8)
   },
 
+  burned: (state) => {
+    if (state.burnAddressTx === null) {
+      return null
+    }
+
+    const amounts = state.burnAddressTx.map(t => Number(t.amount));
+    return amounts.reduce((s, t) => s + t, 0)
+  },
+
   step: (state) => {
     if (state.eth_address_valid !== true) {
       return 1

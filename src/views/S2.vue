@@ -13,10 +13,12 @@
           <input class="form-control form-control-lg monospace" type="text" id="btc" v-model="btc_address" readonly>
         </div>
 
-
+        <p>
+          Total burned: {{ $store.getters.burned }}
+        </p>
 
         <table class="table table-bordered">
-          <caption>Last PDC transactions for <a :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a></caption>
+          <caption>Last PDC transactions to <a target="_blank" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a></caption>
 
           <!-- p-0 align-middle text-center -->
           <thead>
