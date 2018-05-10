@@ -15,6 +15,13 @@
       </li>
     </ul>
 
+    <div class="alert alert-warning" v-if="$router.currentRoute.name > $store.getters.step">
+      Step {{ $store.getters.step }} has not been completed yet.
+    </div>
+    <div class="alert alert-success" v-else-if="$router.currentRoute.name < $store.getters.step">
+      This step has been completed.
+    </div>
+
     <router-view/>
   </div>
 </template>

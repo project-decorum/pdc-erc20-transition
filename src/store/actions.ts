@@ -43,9 +43,15 @@ async function updateBurnTx(ctx: Context) {
 
   ctx.commit(types.BURN_TX_PENDING)
 
-  const response = await axios.get('https://api.blockcypher.com/v1/btc/main/addrs/' + ctx.getters.btc_address + '/balance', { params: { cors: true } })
+  const response = await axios.post(
+    'https://api.omniexplorer.info/v1/transaction/address/0',
+    'addr=' + ctx.getters.btc_address
+  )
 
-  ctx.commit(types.BURN_TX_FULFILLED, response.data.n_tx)
+  // Filter out any other transactions
+  const transactions = (<any[]>response.data.transactions).filter(t => t.propertyid === 59 && t.type_int === 0)
+
+  ctx.commit(types.BURN_TX_FULFILLED, transactions)
 }
 
 export default <ActionTree<RootState, RootState>>{

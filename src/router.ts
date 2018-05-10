@@ -9,9 +9,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/1', component: S1 },
-    { path: '/2', component: S2 },
-    { path: '/3', component: S3 },
-    { path: '/4', component: S4 },
+    { path: '/1', name: '1', component: S1 },
+    { path: '/2', name: '2', component: S2 },
+    { path: '/3', name: '3', component: S3 },
+    { path: '/4', name: '4', component: S4 },
   ]
 })

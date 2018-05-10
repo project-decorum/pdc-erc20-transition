@@ -14,5 +14,21 @@ export default <GetterTree<State, any>>{
 
   allowance_decimal: (state) => {
     return state.allowance === null ? null : state.allowance.shiftedBy(-8).toFixed(8)
-  }
+  },
+
+  step: (state) => {
+    if (state.eth_address_valid !== true) {
+      return 1
+    }
+
+    if (state.burnAddressTx === null || state.burnAddressTx.length === 0) {
+      return 2
+    }
+
+    if (state.allowance === null || state.allowance.isZero()) {
+      return 3
+    }
+
+    return 4
+  },
 }

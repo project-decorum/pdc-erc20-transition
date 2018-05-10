@@ -3,6 +3,7 @@ import { MutationTree } from 'vuex'
 
 import { BigNumber } from 'bignumber.js'
 import { eth_validate } from '@/lib'
+import { AddressTransaction } from './state'
 
 export const types = {
   ETH_ADDRESS_UPDATE: 'ETH_ADDRESS_UPDATE',
@@ -49,7 +50,7 @@ export default <MutationTree<State>>{
     state.burnAddressTx = null
   },
 
-  [types.BURN_TX_FULFILLED](state, burnAddressTx: number | null) {
+  [types.BURN_TX_FULFILLED](state, burnAddressTx: AddressTransaction[] | null) {
     state.burnAddressTxPending = false
     state.burnAddressTx = burnAddressTx
   },
