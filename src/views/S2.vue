@@ -23,7 +23,6 @@
           <!-- p-0 align-middle text-center -->
           <thead>
             <tr>
-              <th>Coin</th>
               <th>Sender</th>
               <th>Amount</th>
               <th>Confirmations</th>
@@ -31,7 +30,6 @@
           </thead>
           <tbody>
             <tr v-for="tx in burnAddressTx" :key="tx.txid">
-              <td>{{ tx.propertyname }}</td>
               <td><samp>{{ tx.sendingaddress }}</samp></td>
               <td class="text-right"><samp>{{ tx.amount }}</samp></td>
               <td class="text-right"><samp>{{ tx.confirmations }}</samp>{{ tx.confirmations === 0 ? ' (unconfirmed!)' : '' }}</td>
