@@ -26,7 +26,10 @@ export default <GetterTree<State, any>>{
       return null
     }
 
-    const amounts = state.burnAddressTx.map(t => new BigNumber(t.amount))
+    const amounts = state.burnAddressTx
+      .filter(t => t.confirmations > 0) // Only count confirmed transactions
+      .map(t => new BigNumber(t.amount))
+
     return amounts.reduce((s, t) => s.plus(t), new BigNumber(0))
   },
 
