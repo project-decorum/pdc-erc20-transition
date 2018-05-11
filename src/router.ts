@@ -9,6 +9,7 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    { path: '/', redirect: '/1' },
     { path: '/1', name: '1', component: S1 },
     { path: '/2', name: '2', component: S2 },
     { path: '/3', name: '3', component: S3 },
