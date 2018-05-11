@@ -2,9 +2,9 @@
   <div>
     <div class="card my-4">
       <div class="card-header">
-        <h2 class="card-title">Step 1 - Your Ethereum address</h2>
+        <h2 class="card-title">Enter your Ethereum address</h2>
         <p class="lead">
-          An address you can send and receive from. For example an address on <a href="https://www.myetherwallet.com/">myetherwallet.com</a>.
+          An address you can send and receive from.
         </p>
       </div>
       <div class="card-body">
@@ -24,6 +24,11 @@
         </form>
       </div>
     </div>
+
+    <h3>Details</h3>
+    <p>
+      We advise
+    </p>
   </div>
 </template>
 

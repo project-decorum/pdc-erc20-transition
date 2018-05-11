@@ -2,14 +2,14 @@
   <div>
     <div class="card my-4">
       <div class="card-header">
-        <h2 class="card-title">Step 2 - Bitcoin burn address</h2>
+        <h2 class="card-title">Burning your OMNI PDC</h2>
         <p class="lead">
-          Burn your OMNI PDC-coins by sending them to the burn address.
+          Send your OMNI PDC coins to your personal burn address.
         </p>
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="btc">Bitcoin burn address</label>
+          <label for="btc">Your burn address</label>
           <input class="form-control form-control-lg monospace" type="text" id="btc" v-model="btc_address" readonly>
         </div>
 

@@ -2,7 +2,7 @@
   <div>
     <div class="card my-4">
       <div class="card-header">
-        <h2 class="card-title">Step 3 - Wait for transaction to be processed</h2>
+        <h2 class="card-title">Wait for approval</h2>
         <p class="lead">
           Wait for the burn transaction to be confirmed and for us to process it.
         </p>
@@ -10,7 +10,7 @@
       <div class="card-body">
         <div class="card-text">
           <p>
-            The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Smart Contract to reflect the balance that is to be claimed.
+            The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Contract to reflect the balance that is to be claimed.
           </p>
         </div>
         <div class="form-group">

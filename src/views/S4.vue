@@ -2,9 +2,9 @@
   <div>
     <div class="card my-4">
       <div class="card-header">
-        <h2 class="card-title">Step 4 - Claim your ERC20 coins</h2>
+        <h2 class="card-title">Claiming the ERC20 coins</h2>
         <p class="lead">
-          Send a claim transaction to the Smart Contract to receive your ERC20 coins you're entitled to.
+          Send a claim transaction to the Contract to receive your ERC20 coins you're entitled to.
         </p>
       </div>
       <div class="card-body form-group">
