@@ -5,10 +5,8 @@ export default class State {
   eth_address_valid: boolean | null = null
 
   allowance: BigNumber | null = null
-  allowancePending: boolean = false
-
   balance: BigNumber | null = null
-  balancePending: boolean = false
+  contractDataPending: boolean = false
 
   txData: string | null = null
   txDataPending: boolean = false

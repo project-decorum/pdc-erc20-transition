@@ -1,6 +1,7 @@
 import State from './state'
 import { GetterTree } from 'vuex'
 
+import { BigNumber } from 'bignumber.js'
 import { eth_to_btc, eth_to_data } from '@/lib'
 
 export default <GetterTree<State, any>>{
@@ -13,11 +14,11 @@ export default <GetterTree<State, any>>{
   },
 
   allowance_decimal: (state) => {
-    return state.allowance === null ? null : state.allowance.shiftedBy(-8).toFixed(8)
+    return state.allowance === null ? null : state.allowance.shiftedBy(-8)
   },
 
   balance_decimal: (state) => {
-    return state.balance === null ? null : state.balance.shiftedBy(-8).toFixed(8)
+    return state.balance === null ? null : state.balance.shiftedBy(-8)
   },
 
   burned: (state) => {
@@ -25,23 +26,36 @@ export default <GetterTree<State, any>>{
       return null
     }
 
-    const amounts = state.burnAddressTx.map(t => Number(t.amount));
-    return amounts.reduce((s, t) => s + t, 0)
+    const amounts = state.burnAddressTx.map(t => new BigNumber(t.amount))
+    return amounts.reduce((s, t) => s.plus(t), new BigNumber(0))
   },
 
-  step: (state) => {
+  step: (state, getters) => {
+    // Fill in a valid Ethereum address
     if (state.eth_address_valid !== true) {
       return 1
     }
 
-    if (state.burnAddressTx === null || state.burnAddressTx.length === 0) {
+    // Burn some coins
+    if (state.burnAddressTx === null || getters.burned.isZero()) {
       return 2
     }
 
-    if (state.allowance === null || state.allowance.isZero()) {
+    // Wait for approval when no allowance and balance
+    if (state.allowance === null || state.balance === null || (state.allowance.isZero() && state.balance.isZero())) {
       return 3
     }
 
-    return 4
+    // allowance + balance != burned ---> wait for approval
+    if (!getters.allowance_decimal.plus(getters.balance_decimal).isEqualTo(getters.burned)) {
+      return 3
+    }
+
+    // Claim the ERC20
+    if (state.balance.isZero()) {
+      return 4
+    }
+
+    return 5
   },
 }

@@ -20,7 +20,6 @@
         <table class="table table-bordered">
           <caption>Last PDC transactions to <a target="_blank" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a></caption>
 
-          <!-- p-0 align-middle text-center -->
           <thead>
             <tr>
               <th>Sender</th>

@@ -8,17 +8,14 @@ import { AddressTransaction } from './state'
 export const types = {
   ETH_ADDRESS_UPDATE: 'ETH_ADDRESS_UPDATE',
 
-  ALLOWANCE_PENDING: 'ALLOWANCE_PENDING',
-  ALLOWANCE_FULFILLED: 'ALLOWANCE_FULFILLED',
+  CONTRACT_DATA_PENDING: 'CONTRACT_DATA_PENDING',
+  CONTRACT_DATA_FULFILLED: 'CONTRACT_DATA_FULFILLED',
 
   TX_DATA_PENDING: 'TX_DATA_PENDING',
   TX_DATA_FULFILLED: 'TX_DATA_FULFILLED',
 
   BURN_TX_PENDING: 'BURN_TX_PENDING',
   BURN_TX_FULFILLED: 'BURN_TX_FULFILLED',
-
-  BALANCE_PENDING: 'BALANCE_PENDING',
-  BALANCE_FULFILLED: 'BALANCE_FULFILLED',
 }
 
 
@@ -28,15 +25,19 @@ export default <MutationTree<State>>{
     state.eth_address_valid = addr === '' ? null : eth_validate(addr)
   },
 
-  [types.ALLOWANCE_PENDING](state) {
-    state.allowancePending = true
+
+  [types.CONTRACT_DATA_PENDING](state) {
+    state.contractDataPending = true
     state.allowance = null
+    state.balance = null
   },
 
-  [types.ALLOWANCE_FULFILLED](state, allowance: BigNumber | null) {
-    state.allowancePending = false
+  [types.CONTRACT_DATA_FULFILLED](state, [allowance, balance]: [BigNumber | null, BigNumber | null]) {
+    state.contractDataPending = false
     state.allowance = allowance
+    state.balance = balance
   },
+
 
   [types.TX_DATA_PENDING](state) {
     state.txDataPending = true
@@ -48,6 +49,7 @@ export default <MutationTree<State>>{
     state.txData = txData
   },
 
+
   [types.BURN_TX_PENDING](state) {
     state.burnAddressTxPending = true
     state.burnAddressTx = null
@@ -56,15 +58,5 @@ export default <MutationTree<State>>{
   [types.BURN_TX_FULFILLED](state, burnAddressTx: AddressTransaction[] | null) {
     state.burnAddressTxPending = false
     state.burnAddressTx = burnAddressTx
-  },
-
-  [types.BALANCE_PENDING](state) {
-    state.balancePending = true
-    state.balance = null
-  },
-
-  [types.BALANCE_FULFILLED](state, balance: BigNumber | null) {
-    state.balancePending = false
-    state.balance = balance
   },
 }

@@ -29,7 +29,11 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class S4 extends Vue {
   created() {
     if (this.$store.state.balance === null) {
-      this.$store.dispatch('updateBalance')
+      this.$store.dispatch('updateContractData')
+    }
+
+    if (this.$store.state.txData === null) {
+      this.$store.dispatch('updateTxData')
     }
   }
 
