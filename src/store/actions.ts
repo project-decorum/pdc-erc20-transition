@@ -2,8 +2,7 @@ import { ActionTree, ActionContext } from 'vuex'
 import RootState from './state'
 import { types } from './mutations'
 
-import { eth_to_allowance, eth_to_data, eth_to_balance } from '@/lib'
-import axios from 'axios'
+import { eth_to_allowance, eth_to_data, eth_to_balance, get_pdc_tx } from '@/lib'
 
 type Context = ActionContext<RootState, RootState>
 
@@ -47,13 +46,7 @@ async function updateBurnTx(ctx: Context) {
 
   ctx.commit(types.BURN_TX_PENDING)
 
-  const response = await axios.post(
-    'https://api.omniexplorer.info/v1/transaction/address/0',
-    'addr=' + ctx.getters.btc_address
-  )
-
-  // Filter out any other transactions
-  const transactions = (<any[]>response.data.transactions).filter(t => t.propertyid === 59 && t.type_int === 0 && t.referenceaddress === ctx.getters.btc_address)
+  const transactions = await get_pdc_tx(ctx.getters.btc_address)
 
   ctx.commit(types.BURN_TX_FULFILLED, transactions)
 }

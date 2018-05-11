@@ -2,12 +2,13 @@ import bitcore from 'bitcore-lib'
 import * as Web3 from 'web3'
 import * as abi from './abi.json'
 import { BigNumber } from 'bignumber.js'
+import axios from 'axios'
 
-const address_contract = '0x69fb16008FA5851E6fec3193d45Daf6792ef0A5E'
-const address_from = '0x4b86dEc5798e095F957Bd17a7AfDa53f7118318f'
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/mew'))
-// const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
+const address_contract = process.env.VUE_APP_PDC_CONTRACT_ADDR
+const address_from = process.env.VUE_APP_PDC_CONTRACT_FROM
+
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.VUE_APP_ETH_RPC))
 const contract = new web3.eth.Contract(abi, address_contract)
 
 export function eth_to_btc(eth_address_str: string) {
@@ -46,6 +47,19 @@ export async function eth_to_data(eth_address_str: string, allowance: BigNumber)
   const abi = await transferFrom.encodeABI()
 
   return abi
+}
+
+export async function get_pdc_tx(btc_address: string) {
+  console.log(process.env.VUE_APP_OMNI_API)
+  const response = await axios.post(
+    process.env.VUE_APP_OMNI_API + '/transaction/address/0',
+    'addr=' + btc_address
+  )
+
+  // Filter out any other transactions
+  const transactions = (<any[]>response.data.transactions).filter(t => t.propertyid === 59 && t.type_int === 0 && t.referenceaddress === btc_address)
+
+  return transactions
 }
 
 
