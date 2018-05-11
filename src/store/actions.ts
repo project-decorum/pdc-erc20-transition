@@ -7,15 +7,7 @@ import axios from 'axios'
 
 type Context = ActionContext<RootState, RootState>
 
-async function update(ctx: Context, eth_address?: string) {
-  if (eth_address !== undefined) {
-    ctx.commit(types.ETH_ADDRESS_UPDATE, eth_address)
-  }
-
-  // Update the burn address tx count too.
-  ctx.dispatch('updateBurnTx')
-  ctx.dispatch('updateBalance')
-
+async function updateAllowance(ctx: Context, eth_address?: string) {
   if (ctx.state.eth_address_valid !== true) {
     ctx.commit(types.ALLOWANCE_FULFILLED, null)
     ctx.commit(types.TX_DATA_FULFILLED, null)
@@ -70,7 +62,7 @@ async function updateBalance(ctx: Context) {
 }
 
 export default <ActionTree<RootState, RootState>>{
-  update,
+  updateAllowance,
   updateBurnTx,
   updateBalance,
 }

@@ -45,18 +45,6 @@
           </tbody>
         </table>
         <button class="btn btn-block btn-primary" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">refresh</button>
-
-
-        <!-- <div class="form-group">
-          <label for="burn-tx">Transactions</label>
-
-          <div class="input-group">
-            <input class="form-control form-control-lg monospace" :class="{ 'is-valid': burnAddressTx > 0 }" id="burn-tx" type="number" v-model="burnAddressTx" readonly>
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button" @click="$store.dispatch('updateBurnTx')">refresh</button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -67,6 +55,12 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class S2 extends Vue {
+  created() {
+    if (this.$store.state.burnAddressTx === null) {
+      this.$store.dispatch('updateBurnTx')
+    }
+  }
+
   get btc_address() {
     return this.$store.getters.btc_address
   }

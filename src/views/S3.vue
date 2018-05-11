@@ -19,7 +19,7 @@
           <div class="input-group">
             <input class="form-control form-control-lg monospace"  :class="{ 'is-valid': Number(allowance) > 0 }" id="allowance" type="number" v-model="allowance" readonly>
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button" @click="$store.dispatch('update')">refresh</button>
+              <button class="btn btn-primary" type="button" @click="$store.dispatch('updateAllowance')">refresh</button>
             </div>
           </div>
         </div>
@@ -33,6 +33,12 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class S3 extends Vue {
+  created() {
+    if (this.$store.state.allowance === null) {
+      this.$store.dispatch('updateAllowance')
+    }
+  }
+
   get allowance() {
     return this.$store.getters.allowance_decimal
   }
