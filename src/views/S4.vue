@@ -8,6 +8,8 @@
         </p>
       </div>
       <div class="card-body form-group">
+        <button class="btn btn-primary" type="button" @click="refresh">refresh</button>
+
         <div>
           <p>Already claimed: {{ $store.getters.balance_decimal }}</p>
         </div>
@@ -27,14 +29,17 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class S4 extends Vue {
-  created() {
+  async created() {
     if (this.$store.state.balance === null) {
-      this.$store.dispatch('updateContractData')
+      await this.$store.dispatch('updateContractData')
     }
 
-    if (this.$store.state.txData === null) {
-      this.$store.dispatch('updateTxData')
-    }
+    await this.$store.dispatch('updateTxData')
+  }
+
+  async refresh() {
+    await this.$store.dispatch('updateContractData')
+    await this.$store.dispatch('updateTxData')
   }
 
   get txData() {

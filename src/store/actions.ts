@@ -24,7 +24,7 @@ async function updateContractData(ctx: Context, eth_address?: string) {
 }
 
 async function updateTxData(ctx: Context, eth_address?: string) {
-  if (ctx.state.eth_address_valid !== true || ctx.state.allowance === null) {
+  if (ctx.state.eth_address_valid !== true || ctx.state.allowance === null || ctx.state.allowance.isZero()) {
     ctx.commit(types.TX_DATA_FULFILLED, null)
 
     return
