@@ -55,7 +55,7 @@ export default <GetterTree<State, any>>{
     }
 
     // Claim the ERC20
-    if (!state.balance.isEqualTo(getters.burned)) {
+    if (!getters.balance_decimal.isEqualTo(getters.burned)) {
       return 4
     }
 
