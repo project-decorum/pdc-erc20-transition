@@ -50,7 +50,6 @@ export async function eth_to_data(eth_address_str: string, allowance: BigNumber)
 }
 
 export async function get_pdc_tx(btc_address: string) {
-  console.log(process.env.VUE_APP_OMNI_API)
   const response = await axios.post(
     process.env.VUE_APP_OMNI_API + '/transaction/address/0',
     'addr=' + btc_address
@@ -61,11 +60,3 @@ export async function get_pdc_tx(btc_address: string) {
 
   return transactions
 }
-
-
-
-// contract.getPastEvents('Approval', {
-//   fromBlock: 3000000,
-//   // toBlock: 'latest',
-//   filter: { owner: '0x4b86dec5798e095f957bd17a7afda53f7118318f' }
-// }).then(console.log)
