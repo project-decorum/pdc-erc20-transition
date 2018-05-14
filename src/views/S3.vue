@@ -4,24 +4,19 @@
       <div class="card-header">
         <h2 class="card-title">Wait for approval</h2>
         <p class="lead">
-          Wait for the burn transaction to be confirmed and for us to process it.
+          Project Decorum will regularly approve the OMNI PDC burn transactions. Once approved, the coins can be claimed.
         </p>
       </div>
       <div class="card-body">
-        <div class="card-text">
-          <p>
-            The burn transaction has to be confirmed on the Bitcoin blockchain. When the transaction is confirmed we'll update the Contract to reflect the balance that is to be claimed.
-          </p>
-        </div>
-        <div class="form-group">
-          <label for="allowance">Allowance</label>
+        <button class="btn btn-block btn-primary mb-4" type="button" @click="$store.dispatch('updateContractData')">refresh</button>
 
-          <div class="input-group">
-            <input class="form-control form-control-lg monospace"  :class="{ 'is-valid': Number(allowance) > 0 }" id="allowance" type="number" v-model="allowance" readonly>
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button" @click="$store.dispatch('updateContractData')">refresh</button>
-            </div>
-          </div>
+        <div class="alert alert-warning my-5" v-if="has_balance">
+          <strong>{{ $store.getters.balance_decimal.toString() }} PDC has been claimed already.</strong>
+        </div>
+
+        <div class="form-group my-5">
+          <label for="allowance">Claimable:</label>
+          <input class="form-control form-control-lg monospace"  :class="{ 'is-valid': Number(allowance) > 0 }" id="allowance" type="number" v-model="allowance" readonly>
         </div>
       </div>
     </div>
@@ -41,6 +36,10 @@ export default class S3 extends Vue {
 
   get allowance() {
     return this.$store.getters.allowance_decimal
+  }
+
+  get has_balance() {
+    return this.$store.state.balance !== null && !this.$store.state.balance.isZero()
   }
 }
 </script>

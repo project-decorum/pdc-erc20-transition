@@ -4,27 +4,45 @@
       <div class="card-header">
         <h2 class="card-title">Claiming the ERC20 coins</h2>
         <p class="lead">
-          Send a claim transaction to the Contract to receive your ERC20 coins you're entitled to.
+          Call the Contract to receive your ERC20 coins you're entitled to.
         </p>
       </div>
-      <div class="card-body form-group">
-        <button class="btn btn-primary" type="button" @click="refresh">refresh</button>
+      <div class="card-body">
+        <button class="btn btn-block btn-primary mb-4" type="button" @click="refresh">refresh</button>
 
-        <div>
-          <p>Already claimed: {{ $store.getters.balance_decimal }}</p>
+        <div class="alert alert-danger" v-if="$store.state.paused">
+          <strong>Claiming is paused.</strong>
+          For now it's not possible to claim your tokens. The contract will be unpaused in due time.
         </div>
 
-        <div>
-          <p>Paused: {{ $store.state.paused }}</p>
+        <div class="alert alert-success my-5" v-if="has_balance">
+          <strong>{{ $store.getters.balance_decimal.toString() }} PDC has been claimed already.</strong>
         </div>
 
-        <label for="contract-address">Contract address</label>
-        <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xTODO" readonly>
+        <div class="card-text my-5">
+          <p>
+            Calling the contract is done by sending a transaction that contains data. The transaction does not transact Ether. However, a transaction incurs a fee. Make sure the Ethereum address has sufficient Ether balance.
+          </p>
 
-        <label for="tx-data">Data to send to contract</label>
-        <textarea class="form-control form-control-lg monospace" id="tx-data" v-model="txData" readonly></textarea>
+          <p>
+            The transaction has to be sent from the address you provided (at step 1): <samp>{{ $store.state.eth_address }}</samp>
+          </p>
+        </div>
+
+        <div class="form-group mt-5">
+          <label for="contract-address">Send to:</label>
+          <input class="form-control form-control-lg monospace" id="contract-address" type="text" :value="contractAddress" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-data">Data to send:</label>
+          <textarea class="form-control form-control-lg monospace" id="tx-data" v-model="txData" readonly></textarea>
+        </div>
+
       </div>
     </div>
+
+    <img class="img-fluid" src="../assets/mew-send.png">
   </div>
 </template>
 
@@ -48,6 +66,14 @@ export default class S4 extends Vue {
 
   get txData() {
     return this.$store.state.txData
+  }
+
+  get contractAddress() {
+    return process.env.VUE_APP_PDC_CONTRACT_ADDR
+  }
+
+  get has_balance() {
+    return this.$store.state.balance !== null && !this.$store.state.balance.isZero()
   }
 }
 </script>

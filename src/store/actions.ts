@@ -8,7 +8,7 @@ type Context = ActionContext<RootState, RootState>
 
 async function updateContractData(ctx: Context, eth_address?: string) {
   if (ctx.state.eth_address_valid !== true) {
-    ctx.commit(types.CONTRACT_DATA_PENDING, [null, null, null])
+    ctx.commit(types.CONTRACT_DATA_FULFILLED, [null, null, null])
 
     return
   }
