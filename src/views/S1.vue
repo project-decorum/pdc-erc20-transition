@@ -8,20 +8,18 @@
         </p>
       </div>
       <div class="card-body">
-        <form>
-          <div class="form-row">
-            <label for="eth-address">Ethereum address</label>
-            <input type="text" class="form-control form-control-lg monospace" :class="{ 'is-valid': valid === true, 'is-invalid': valid === false }" id="eth-address" v-model="eth_address" required>
-            <small class="form-text text-muted">An Ethereum address starts with '<samp>0x</samp>'.</small>
+        <div class="form-row">
+          <label for="eth-address">Ethereum address</label>
+          <input type="text" class="form-control form-control-lg monospace" :class="{ 'is-valid': valid === true, 'is-invalid': valid === false }" id="eth-address" @keyup.enter="next" v-model="eth_address" required>
+          <small class="form-text text-muted">An Ethereum address starts with '<samp>0x</samp>'.</small>
 
-            <div class="valid-feedback">
-              The address is valid.
-            </div>
-            <div class="invalid-feedback">
-              Please enter a valid address.
-            </div>
+          <div class="valid-feedback">
+            The address is valid.
           </div>
-        </form>
+          <div class="invalid-feedback">
+            Please enter a valid address.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -51,6 +49,12 @@ export default class S2 extends Vue {
 
   get valid() {
     return this.$store.state.eth_address_valid
+  }
+
+  next() {
+    if (this.valid) {
+      this.$router.push('/2')
+    }
   }
 }
 </script>
