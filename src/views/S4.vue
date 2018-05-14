@@ -1,33 +1,25 @@
 <template>
   <div>
-    <div class="card my-4">
-      <div class="card-header">
-        <h2 class="card-title">Claiming the ERC20 coins</h2>
-        <p class="lead">
-          Call the Contract to receive your ERC20 coins you're entitled to.
-        </p>
-      </div>
-      <div class="card-body">
-        <button class="btn btn-block btn-primary mb-4" type="button" @click="refresh">refresh</button>
+    <div class="text-center">
+      <h1>Claiming the ERC20 coins</h1>
+      <p class="lead">
+        Call the Contract to receive your ERC20 coins you're entitled to
+      </p>
+    </div>
 
-        <div class="alert alert-danger" v-if="$store.state.paused">
-          <strong>Claiming is paused.</strong>
-          For now it's not possible to claim your tokens. The contract will be unpaused in due time.
-        </div>
+    <div class="alert alert-danger my-5" v-if="$store.state.paused">
+      <strong>Claiming is paused.</strong>
+      For now it's not possible to claim your tokens. The contract will be unpaused in due time.
+    </div>
+
+    <div class="row my-5">
+      <div class="col-lg py-4 bg-light">
 
         <div class="alert alert-success my-5" v-if="has_balance">
           <strong>{{ $store.getters.balance_decimal.toString() }} PDC has been claimed already.</strong>
         </div>
 
-        <div class="card-text my-5">
-          <p>
-            Calling the contract is done by sending a transaction that contains data. The transaction does not transact Ether. However, a transaction incurs a fee. Make sure the Ethereum address has sufficient Ether balance.
-          </p>
-
-          <p>
-            The transaction has to be sent from the address you provided (at step 1): <samp>{{ $store.state.eth_address }}</samp>
-          </p>
-        </div>
+        <button class="float-right btn btn-info" type="button" @click="refresh">refresh</button>
 
         <div class="form-group mt-5">
           <label for="contract-address">Send to:</label>
@@ -38,11 +30,23 @@
           <label for="tx-data">Data to send:</label>
           <textarea class="form-control form-control-lg monospace" id="tx-data" v-model="txData" readonly></textarea>
         </div>
+      </div>
 
+      <div class="col-lg py-4 bg-dark text-white">
+        <p>
+          Calling the contract is done by sending a transaction that contains data. The transaction does not transact Ether. However, a transaction incurs a fee. Make sure the Ethereum address has sufficient Ether balance.
+        </p>
+
+        <p>
+          The transaction has to be sent from the address you provided (at step 1): <samp>{{ $store.state.eth_address }}</samp>
+        </p>
+
+        <p>
+          This transaction can be sent using MyEtherWallet:
+          <img class="img-fluid" src="../assets/mew-send.png">
+        </p>
       </div>
     </div>
-
-    <img class="img-fluid" src="../assets/mew-send.png">
   </div>
 </template>
 

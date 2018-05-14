@@ -15,6 +15,7 @@
       </li>
     </ul>
 
+    <router-view/>
 
     <div class="alert alert-info" v-if="$store.state.contractDataPending || $store.state.burnAddressTxPending">
       Refreshing data...
@@ -25,8 +26,6 @@
     <div class="alert alert-success" v-else-if="$router.currentRoute.name < $store.getters.step">
       This step has been completed.
     </div>
-
-    <router-view/>
   </div>
 </template>
 

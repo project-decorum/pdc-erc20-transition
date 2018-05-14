@@ -1,31 +1,44 @@
 <template>
   <div>
-    <div class="card my-4">
-      <div class="card-header">
-        <h2 class="card-title">Burning your OMNI PDC</h2>
-        <p class="lead">
-          Send your OMNI PDC coins to your personal burn address.
-        </p>
-      </div>
-      <div class="card-body">
-        <button class="btn btn-block btn-primary mb-4" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">refresh</button>
+    <div class="text-center">
+      <h1>Burning your OMNI PDC</h1>
+      <p class="lead">
+        Sending your OMNI PDC coins to your personal burn address
+      </p>
+    </div>
 
-        <div class="form-group my-5">
+    <div class="row my-5">
+      <div class="col-lg py-4 bg-light">
+        <div class="form-group">
           <label for="btc">Your burn address:</label>
           <input class="form-control form-control-lg monospace" type="text" id="btc" v-model="btc_address" readonly>
         </div>
-
+      </div>
+      <div class="col-lg py-4 bg-dark text-white">
         <p>
-          Shown below is a table containing the last OMNI PDC transactions to <a target="_blank" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a>:
+          The burn address is generated from your Ethereum address.
         </p>
 
+        <p>
+          Your OMNI PDC have to be sent to the burn address. This can be done from <a href="https://www.omniwallet.org/">OmniWallet</a>:
+
+          <img class="img-fluid" src="../assets/omniwallet-send.png">
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row my-5">
+      <div class="col-lg py-4 bg-light">
+        <button class="float-right btn btn-info" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">refresh</button>
+
         <div class="table-responsive">
-          <table class="table table-sm table-bordered table-hover mb-5">
+          <table class="table table-sm table-bordered table-hover">
             <thead class="thead-light">
               <tr>
                 <th>Sender</th>
                 <th>Amount</th>
-                <th>Confirmations</th>
+                <th title="Confirmations">Conf.</th>
               </tr>
             </thead>
             <tbody>
@@ -41,17 +54,30 @@
                 <td colspan="5">No transactions...</td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td class="text-muted">Total OMNI PDC burned</td>
+                <td class="text-right"><strong><samp>{{ $store.getters.burned === null ? 'unknown' : $store.getters.burned.toString() }}</samp></strong></td>
+                <td></td>
+              </tr>
+            </tfoot>
           </table>
         </div>
-
+      </div>
+      <div class="col-lg py-4 bg-dark text-white">
+        <p>
+          Shown is a table containing the last OMNI PDC transactions to <a target="_blank" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a>.
+        </p>
 
         <p>
-          Total OMNI PDC burned: <strong><samp>{{ $store.getters.burned === null ? 'unknown' : $store.getters.burned.toString() }}</samp></strong>
+          The burn transaction will have to be confirmed at least once. Meaning the transaction has been mined.
+        </p>
+
+        <p>
+          Depending on the fee compared to other pending transactions, this might take a while.
         </p>
       </div>
     </div>
-
-    <img class="img-fluid" src="../assets/omniwallet-send.png">
   </div>
 </template>
 
