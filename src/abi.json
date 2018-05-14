@@ -151,7 +151,7 @@
     "name": "decreaseApproval",
     "outputs": [
       {
-        "name": "success",
+        "name": "",
         "type": "bool"
       }
     ],
@@ -224,6 +224,30 @@
     "constant": false,
     "inputs": [
       {
+        "name": "_spenders",
+        "type": "address[]"
+      },
+      {
+        "name": "_addedValues",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "increaseApprovalBatch",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x9affa42d"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_to",
         "type": "address"
       },
@@ -243,6 +267,36 @@
     "stateMutability": "nonpayable",
     "type": "function",
     "signature": "0xa9059cbb"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_symbol",
+        "type": "string"
+      }
+    ],
+    "name": "setSymbol",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xb84c8246"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "string"
+      }
+    ],
+    "name": "setName",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xc47f0027"
   },
   {
     "constant": false,
@@ -283,7 +337,7 @@
     "name": "increaseApproval",
     "outputs": [
       {
-        "name": "success",
+        "name": "",
         "type": "bool"
       }
     ],
@@ -335,7 +389,8 @@
     "inputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "constructor"
+    "type": "constructor",
+    "signature": "constructor"
   },
   {
     "anonymous": false,
