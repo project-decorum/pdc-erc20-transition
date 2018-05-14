@@ -43,6 +43,10 @@ export default class S2 extends Vue {
 
   set eth_address(addr: string) {
     this.$store.commit('ETH_ADDRESS_UPDATE', addr)
+
+    // Reset other states
+    this.$store.commit('CONTRACT_DATA_FULFILLED', [null, null, null])
+    this.$store.commit('BURN_TX_PENDING', null)
   }
 
   get valid() {
