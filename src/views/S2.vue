@@ -44,6 +44,8 @@
         <button class="btn btn-block btn-primary" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">refresh</button>
       </div>
     </div>
+
+    <img class="img-fluid" src="../assets/omniwallet-send.png">
   </div>
 </template>
 
