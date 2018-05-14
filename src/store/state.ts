@@ -6,6 +6,7 @@ export default class State {
 
   allowance: BigNumber | null = null
   balance: BigNumber | null = null
+  paused: boolean | null = null
   contractDataPending: boolean = false
 
   txData: string | null = null

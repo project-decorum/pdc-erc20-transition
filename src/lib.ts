@@ -49,6 +49,13 @@ export async function eth_to_data(eth_address_str: string, allowance: BigNumber)
   return abi
 }
 
+export async function get_paused() {
+  const pausedTx = contract.methods.paused()
+  const paused = Boolean(await pausedTx.call())
+
+  return paused
+}
+
 export async function get_pdc_tx(btc_address: string) {
   const response = await axios.post(
     process.env.VUE_APP_OMNI_API + '/transaction/address/0',

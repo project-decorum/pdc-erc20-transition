@@ -2,7 +2,7 @@ import { ActionTree, ActionContext } from 'vuex'
 import RootState from './state'
 import { types } from './mutations'
 
-import { eth_to_allowance, eth_to_data, eth_to_balance, get_pdc_tx } from '@/lib'
+import { eth_to_allowance, eth_to_data, eth_to_balance, get_pdc_tx, get_paused } from '@/lib'
 
 type Context = ActionContext<RootState, RootState>
 
@@ -15,12 +15,13 @@ async function updateContractData(ctx: Context, eth_address?: string) {
 
   ctx.commit(types.CONTRACT_DATA_PENDING)
 
-  const [allowance, balance] = await Promise.all([
+  const [allowance, balance, paused] = await Promise.all([
     eth_to_allowance(ctx.state.eth_address),
-    eth_to_balance(ctx.state.eth_address)
+    eth_to_balance(ctx.state.eth_address),
+    get_paused()
   ])
 
-  ctx.commit(types.CONTRACT_DATA_FULFILLED, [allowance, balance])
+  ctx.commit(types.CONTRACT_DATA_FULFILLED, [allowance, balance, paused])
 }
 
 async function updateTxData(ctx: Context, eth_address?: string) {

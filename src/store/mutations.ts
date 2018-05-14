@@ -30,12 +30,14 @@ export default <MutationTree<State>>{
     state.contractDataPending = true
     state.allowance = null
     state.balance = null
+    state.paused = null
   },
 
-  [types.CONTRACT_DATA_FULFILLED](state, [allowance, balance]: [BigNumber | null, BigNumber | null]) {
+  [types.CONTRACT_DATA_FULFILLED](state, [allowance, balance, paused]: [BigNumber | null, BigNumber | null, boolean | null]) {
     state.contractDataPending = false
     state.allowance = allowance
     state.balance = balance
+    state.paused = paused
   },
 
 

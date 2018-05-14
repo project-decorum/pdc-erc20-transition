@@ -14,6 +14,10 @@
           <p>Already claimed: {{ $store.getters.balance_decimal }}</p>
         </div>
 
+        <div>
+          <p>Paused: {{ $store.state.paused }}</p>
+        </div>
+
         <label for="contract-address">Contract address</label>
         <input class="form-control form-control-lg monospace" id="contract-address" type="text" value="0xTODO" readonly>
 
