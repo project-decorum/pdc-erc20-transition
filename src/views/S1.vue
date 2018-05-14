@@ -46,7 +46,7 @@ export default class S2 extends Vue {
 
     // Reset other states
     this.$store.commit('CONTRACT_DATA_FULFILLED', [null, null, null])
-    this.$store.commit('BURN_TX_PENDING', null)
+    this.$store.commit('BURN_TX_FULFILLED', null)
   }
 
   get valid() {

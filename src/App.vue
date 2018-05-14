@@ -15,7 +15,11 @@
       </li>
     </ul>
 
-    <div class="alert alert-warning" v-if="$router.currentRoute.name > $store.getters.step">
+
+    <div class="alert alert-info" v-if="$store.state.contractDataPending || $store.state.burnAddressTxPending">
+      Refreshing data...
+    </div>
+    <div class="alert alert-warning" v-else-if="$router.currentRoute.name > $store.getters.step">
       Step {{ $store.getters.step }} has not been completed yet.
     </div>
     <div class="alert alert-success" v-else-if="$router.currentRoute.name < $store.getters.step">
