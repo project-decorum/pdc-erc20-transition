@@ -11,7 +11,7 @@
       <div class="col-lg py-4 bg-light">
         <div class="form-group">
           <label for="eth-address">Enter your Ethereum (ETH) address:</label>
-          <input type="text" class="form-control form-control-lg monospace" :class="{ 'is-valid': valid === true, 'is-invalid': valid === false }" id="eth-address" @keyup.enter="next" v-model="eth_address" required>
+          <input ref="eth" type="text" class="form-control form-control-lg monospace" :class="{ 'is-valid': valid === true, 'is-invalid': valid === false }" id="eth-address" @keyup.enter="next" v-model="eth_address" required>
 
           <div class="valid-feedback">
             The address is valid.
@@ -37,6 +37,10 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class S2 extends Vue {
+  mounted() {
+    (<HTMLElement>this.$refs.eth).focus()
+  }
+
   get eth_address() {
     return this.$store.state.eth_address
   }
