@@ -39,5 +39,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+    // If there is a query parameter and it's not used yet
+    if ('addr' in this.$route.query && this.$store.state.eth_address !== this.$route.query.addr) {
+      this.$store.commit('ETH_ADDRESS_UPDATE', this.$route.query.addr)
+
+      this.$store.dispatch('updateBurnTx')
+      this.$store.dispatch('updateContractData')
+    }
+  }
+}
 </script>

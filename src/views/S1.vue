@@ -40,11 +40,6 @@ export default class S2 extends Vue {
   mounted() {
     // Focus the input field on load
     (<HTMLElement>this.$refs.eth).focus()
-
-    // If there is a query parameter and it's not used yet
-    if ('addr' in this.$route.query && this.eth_address !== this.$route.query.addr) {
-      this.eth_address = this.$route.query.addr
-    }
   }
 
   get eth_address() {
