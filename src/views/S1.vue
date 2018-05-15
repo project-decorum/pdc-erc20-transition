@@ -38,7 +38,13 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component({})
 export default class S2 extends Vue {
   mounted() {
+    // Focus the input field on load
     (<HTMLElement>this.$refs.eth).focus()
+
+    // If there is a query parameter and it's not used yet
+    if ('addr' in this.$route.query && this.eth_address !== this.$route.query.addr) {
+      this.eth_address = this.$route.query.addr
+    }
   }
 
   get eth_address() {
@@ -47,6 +53,13 @@ export default class S2 extends Vue {
 
   set eth_address(addr: string) {
     this.$store.commit('ETH_ADDRESS_UPDATE', addr)
+
+    // Push the address as query parameter
+    if (this.valid) {
+      this.$router.push({ name: '1', query: { addr } })
+    } else {
+      this.$router.push({ name: '1' })
+    }
 
     // Reset other states
     this.$store.commit('CONTRACT_DATA_FULFILLED', [null, null, null])
