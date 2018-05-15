@@ -15,13 +15,18 @@ async function updateContractData(ctx: Context, eth_address?: string) {
 
   ctx.commit(types.CONTRACT_DATA_PENDING)
 
-  const [allowance, balance, paused] = await Promise.all([
-    eth_to_allowance(ctx.state.eth_address),
-    eth_to_balance(ctx.state.eth_address),
-    get_paused()
-  ])
+  try {
+    const [allowance, balance, paused] = await Promise.all([
+      eth_to_allowance(ctx.state.eth_address),
+      eth_to_balance(ctx.state.eth_address),
+      get_paused()
+    ])
 
-  ctx.commit(types.CONTRACT_DATA_FULFILLED, [allowance, balance, paused])
+    ctx.commit(types.CONTRACT_DATA_FULFILLED, [allowance, balance, paused])
+  } catch (error) {
+    console.error(error)
+    ctx.commit(types.CONTRACT_DATA_FULFILLED, [null, null, null])
+  }
 }
 
 async function updateTxData(ctx: Context, eth_address?: string) {
@@ -33,9 +38,14 @@ async function updateTxData(ctx: Context, eth_address?: string) {
 
   ctx.commit(types.TX_DATA_PENDING)
 
-  const tx_data = await eth_to_data(ctx.state.eth_address, ctx.state.allowance)
+  try {
+    const tx_data = await eth_to_data(ctx.state.eth_address, ctx.state.allowance)
 
-  ctx.commit(types.TX_DATA_FULFILLED, tx_data)
+    ctx.commit(types.TX_DATA_FULFILLED, tx_data)
+  } catch (error) {
+    console.error(error)
+    ctx.commit(types.TX_DATA_FULFILLED, null)
+  }
 }
 
 async function updateBurnTx(ctx: Context) {
@@ -47,9 +57,14 @@ async function updateBurnTx(ctx: Context) {
 
   ctx.commit(types.BURN_TX_PENDING)
 
-  const transactions = await get_pdc_tx(ctx.getters.btc_address)
+  try {
+    const transactions = await get_pdc_tx(ctx.getters.btc_address)
 
-  ctx.commit(types.BURN_TX_FULFILLED, transactions)
+    ctx.commit(types.BURN_TX_FULFILLED, transactions)
+  } catch (error) {
+    console.error(error)
+    ctx.commit(types.BURN_TX_FULFILLED, null)
+  }
 }
 
 export default <ActionTree<RootState, RootState>>{
