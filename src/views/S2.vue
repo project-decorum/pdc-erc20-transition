@@ -50,7 +50,10 @@
               <tr v-if="burnAddressTxPending">
                 <td colspan="5">Refreshing...</td>
               </tr>
-              <tr v-else-if="burnAddressTx === null || !burnAddressTx.length">
+              <tr v-else-if="burnAddressTx === null">
+                <td colspan="5">Unkown</td>
+              </tr>
+              <tr v-else-if="!burnAddressTx.length">
                 <td colspan="5">No transactions...</td>
               </tr>
             </tbody>
