@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="col-lg py-4 bg-dark text-white">
-        ...
+        For security reasons we currently validate issuance manually, we try to do this at least twice per day. Thank you for your patience.
       </div>
     </div>
   </div>
