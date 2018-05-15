@@ -22,7 +22,7 @@
         <p>
           Your OMNI PDC have to be sent to the burn address. This can be done from <a target="_blanl" rel="noopener" href="https://www.omniwallet.org/">OmniWallet</a>:
 
-          <img class="img-fluid" src="../assets/omniwallet-send.png">
+          <a :href="require('../assets/omniwallet-send.png')" target="_blank"><img class="img-fluid" src="../assets/omniwallet-send.png"></a>
         </p>
       </div>
     </div>

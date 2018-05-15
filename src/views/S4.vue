@@ -43,7 +43,7 @@
 
         <p>
           This transaction can be sent using MyEtherWallet:
-          <img class="img-fluid" src="../assets/mew-send.png">
+          <a :href="require('../assets/mew-send.png')" target="_blank"><img class="img-fluid" src="../assets/mew-send.png"></a>
         </p>
       </div>
     </div>
