@@ -9,6 +9,10 @@
 
     <div class="row my-5">
       <div class="col-lg py-4 bg-light">
+        <div class="alert alert-warning">
+          <strong>Only send PDC to your burn address!</strong> Any other coins such as BTC cannot be recovered or reimbursed!
+        </div>
+
         <div class="form-group">
           <label for="btc">Your burn address:</label>
           <input class="form-control form-control-lg monospace" type="text" id="btc" v-model="btc_address" readonly>
