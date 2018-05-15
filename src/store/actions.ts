@@ -7,6 +7,10 @@ import { eth_to_allowance, eth_to_data, eth_to_balance, get_pdc_tx, get_paused }
 type Context = ActionContext<RootState, RootState>
 
 async function updateContractData(ctx: Context, eth_address?: string) {
+  if (ctx.state.contractDataPending) {
+    return
+  }
+
   if (ctx.state.eth_address_valid !== true) {
     ctx.commit(types.CONTRACT_DATA_FULFILLED, [null, null, null])
 
@@ -30,6 +34,10 @@ async function updateContractData(ctx: Context, eth_address?: string) {
 }
 
 async function updateTxData(ctx: Context, eth_address?: string) {
+  if (ctx.state.txDataPending) {
+    return
+  }
+
   if (ctx.state.eth_address_valid !== true || ctx.state.allowance === null || ctx.state.allowance.isZero()) {
     ctx.commit(types.TX_DATA_FULFILLED, null)
 
@@ -49,6 +57,10 @@ async function updateTxData(ctx: Context, eth_address?: string) {
 }
 
 async function updateBurnTx(ctx: Context) {
+  if (ctx.state.burnAddressTxPending) {
+    return
+  }
+
   if (ctx.state.eth_address_valid !== true) {
     ctx.commit(types.BURN_TX_FULFILLED, null)
 
