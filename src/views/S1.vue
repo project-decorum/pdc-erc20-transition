@@ -25,7 +25,7 @@
         <p>Use an address that you can send and receive from. After conversion, this address will hold your ERC20 tokens.</p>
 
         <p>
-          <strong>Do not use an address from an exchange. </strong><a target="_blank" href="https://www.myetherwallet.com">MyEtherWallet</a> offers a range of wallet options to chose from. We advise using a hardware wallet.
+          <strong>Do not use an address from an exchange. </strong><a target="_blank" rel="noopener" href="https://www.myetherwallet.com">MyEtherWallet</a> offers a range of wallet options to chose from. We advise using a hardware wallet.
         </p>
       </div>
     </div>

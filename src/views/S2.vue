@@ -20,7 +20,7 @@
         </p>
 
         <p>
-          Your OMNI PDC have to be sent to the burn address. This can be done from <a href="https://www.omniwallet.org/">OmniWallet</a>:
+          Your OMNI PDC have to be sent to the burn address. This can be done from <a target="_blanl" rel="noopener" href="https://www.omniwallet.org/">OmniWallet</a>:
 
           <img class="img-fluid" src="../assets/omniwallet-send.png">
         </p>
@@ -66,7 +66,7 @@
       </div>
       <div class="col-lg py-4 bg-dark text-white">
         <p>
-          Shown is a table containing the last OMNI PDC transactions to <a target="_blank" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a>.
+          Shown is a table containing the last OMNI PDC transactions to <a target="_blank" rel="noopener" :href="'https://omniexplorer.info/address/' + btc_address"><samp>{{ btc_address }}</samp></a>.
         </p>
 
         <p>
