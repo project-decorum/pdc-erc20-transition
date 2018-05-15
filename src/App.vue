@@ -30,8 +30,8 @@
 
     <router-view/>
 
-    <router-link v-if="$router.currentRoute.name > 1" :to="{ name: Number($router.currentRoute.name) - 1, query: $route.query }" class="float-left btn btn-primary">previous step</router-link>
-    <router-link v-if="$router.currentRoute.name < 4" :to="{ name: Number($router.currentRoute.name) + 1, query: $route.query }" class="float-right btn btn-primary">next step</router-link>
+    <router-link v-if="$router.currentRoute.name > 1" :to="{ name: Number($router.currentRoute.name) - 1, query: $route.query }" class="float-left btn btn-primary">Previous step</router-link>
+    <router-link v-if="$router.currentRoute.name < 4" :to="{ name: Number($router.currentRoute.name) + 1, query: $route.query }" class="float-right btn btn-primary">Next step</router-link>
   </div>
 </template>
 

@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-          <button class="float-right btn btn-info" type="button" @click="$store.dispatch('updateContractData')">refresh</button>
+          <button class="float-right btn btn-info" type="button" @click="$store.dispatch('updateContractData')">Refresh</button>
           <label for="allowance">Claimable:</label>
           <input class="form-control form-control-lg monospace"  :class="{ 'is-valid': Number(allowance) > 0 }" id="allowance" type="number" v-model="allowance" readonly>
         </div>

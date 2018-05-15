@@ -30,7 +30,7 @@
 
     <div class="row my-5">
       <div class="col-lg py-4 bg-light">
-        <button class="float-right btn btn-info" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">refresh</button>
+        <button class="float-right btn btn-info" type="button" @click="$store.dispatch('updateBurnTx')" :disabled="burnAddressTxPending">Refresh</button>
 
         <div class="table-responsive">
           <table class="table table-sm table-bordered table-hover">

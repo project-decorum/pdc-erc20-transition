@@ -19,7 +19,7 @@
           <strong>{{ $store.getters.balance_decimal.toString() }} PDC has been claimed already.</strong>
         </div>
 
-        <button class="float-right btn btn-info" type="button" @click="refresh">refresh</button>
+        <button class="float-right btn btn-info" type="button" @click="refresh">Refresh</button>
 
         <div class="form-group mt-5">
           <label for="contract-address">Send to:</label>
