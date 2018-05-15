@@ -38,7 +38,7 @@
         </p>
 
         <p>
-          The transaction has to be sent from the address you provided (at step 1): <samp>{{ $store.state.eth_address }}</samp>
+          The PDC need to claimed using the address you provided.
         </p>
 
         <p>
