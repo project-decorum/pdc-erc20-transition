@@ -38,7 +38,7 @@
         </p>
 
         <p>
-          The PDC need to claimed using the address you provided.
+          The PDC need to be claimed using the address you provided.
         </p>
 
         <p>
