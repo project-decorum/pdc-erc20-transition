@@ -1,6 +1,6 @@
 import bitcore from 'bitcore-lib'
-import * as Web3 from 'web3'
-import * as abi from './abi.json'
+import Web3 from 'web3'
+import abi from './abi.json'
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 
@@ -8,8 +8,8 @@ import axios from 'axios'
 const address_contract = process.env.VUE_APP_PDC_CONTRACT_ADDR
 const address_from = process.env.VUE_APP_PDC_CONTRACT_FROM
 
-const web3 = new Web3(new Web3.providers.HttpProvider(process.env.VUE_APP_ETH_RPC))
-const contract = new web3.eth.Contract(abi, address_contract)
+const web3 = new Web3(new Web3.providers.HttpProvider(<string>process.env.VUE_APP_ETH_RPC))
+const contract = new web3.eth.Contract(<any>abi, address_contract)
 
 export function eth_to_btc(eth_address_str: string) {
   // Make sure address is in right format.
